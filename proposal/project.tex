@@ -1,0 +1,88 @@
+% Author: Rohit Must @ UVa MS CS %
+
+\documentclass[12pt]{article}
+
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{url}
+\usepackage[margin=0.5in]{geometry}
+
+\pagenumbering{gobble}
+
+\titleformat{\section}
+{\Large\bfseries}
+{}
+{0em}
+{}
+
+\titlespacing{\section}
+{0em}{0em}{0.1em}
+\titlespacing{\subsection}
+{0em}{0.1em}{0.1em}
+
+\renewcommand{\maketitle}{
+    
+    {\noindent\huge\bfseries\thetitle}
+
+    \vspace{0.25em}
+    {\noindent \textbf{Authors:} \theauthor} 
+    {\noindent \textbf{Date:} \thedate}
+
+}
+
+\title{Innovating in the Public Interest:\\Courts Data Project}
+\author{Rohit Musti, Omkar Bhat, Jack Verrier, Ari Klau}
+\date{\today}
+
+
+% ***************************************************
+\begin{document} 
+
+\maketitle
+
+\section{Background}
+
+\subsection{Context}
+
+\noindent The original virginia courts data project - \url{https://virginiacourtdata.org/}  -  was created by and is mainatained by Ben Schoenfeld, a computer engineer and civic technology hobbyist.
+It scrapes records created by the Virginia Courts data system and publishes the aggregated results into more easily analyzable representations.
+This data has been referenced in many news articles to expose bias within the court system and to analyze widespread social problems, like medical debt.
+Maintaining this project and improving upon it is certainly in the public interest; at the moment, it is supported by Mr. Schoenfeld's private funds and time.
+We propose coordinating with several groups at the University of Virginia (the Law School's Legal Data Lab, CommPAS Lab of the Batten School \& University Library, and the Computer Science department) to host and expand the courts data project.
+
+\subsection{Stakeholders}
+
+\noindent There are two stakeholders for this project: Dr. Michelle Claibourn and Mr. Jon Ashley. 
+Dr. Michelle Claibourn is the Director of Research Data Services at the University of Virginia Library, Co-Director of the CommPAS Lab, and the Director of the Public Interest Data Lab.
+Jon Ashley is the Head of the Legal Data Lab and Research Librarian.
+Dr. Claibourn represents the CommPASS Lab, Mr. Ashley represents the Legal Data Lab, and Dr. Jack Davidson along with the students developing the project represent the Computer Science Department.
+
+\section{Project Proposal}
+
+\subsection{Improvements on the Original Project}
+
+\noindent We seek to improve on Schoenfeld's original implementation by micro-servicing and containerizing the project. 
+By separating the data scraping, database, and data download points of the project into separate services, we will build a more resilient and easily scalable system.
+A side benefit is making it easier to understand which datasets are the most popular and identify the most costly steps within the project.
+If this modular system is designed well, it will also make it smoother for future developers to integrate their own data scraping services.
+While we haven't finalized the exact implementation details of the project, we anticipate using a relational database and python3.
+A relational database would make querying and generating CSV files simpler than a non-schema-based database.
+Python has also become the default language taught within UVA and is also one of the most universal understood programming languages.
+
+\subsection{Novel Contributions}
+
+\noindent We plan on increasing the number of states aggregated for the project. 
+There has already been some work scraping Massachusetts' court data and most other states have open data portals.
+We anticipate that by creating a national data aggregation tool, even more trends can be discovered.
+Additionally, journalists across the country will be able to report on either their local trends or pressing national issues through the data.
+Pushing this project to emcopass is also inline the Public Interest Technology University Network grant that supports this course.
+
+\subsection{Risks}
+
+\noindent The most notable risk by aggregating this data is comprising the privacy of already marginalized groups.
+We plan on taking steps to remove identifying features from the data.
+We will also have independent experts review our data processing and data aggregation work to ensure that we are not compromising the rights or privacy of any individuals.
+
+
+
+\end{document}
