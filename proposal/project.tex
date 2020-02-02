@@ -79,26 +79,25 @@ Dr. Claibourn represents the CommPASS Lab, Mr. Ashley represents the Legal Data 
 
 \noindent We seek to improve on Schoenfeld's original implementation by micro-servicing and containerizing the project. 
 By separating the data scraping, database, and data download points of the project into separate services, we will build a more resilient and easily scalable system.
-A side benefit is making it easier to understand which datasets are the most popular and identify the most costly steps within the project.
+A side benefit is that it will be easier to understand which datasets are the most popular and identify the most computations steps within the project, telling developers where to make the process more efficient.
 If this modular system is designed well, it will also make it smoother for future developers to integrate their own data scraping services.
 While we haven't finalized the exact implementation details of the project, we anticipate using a relational database and python3.
-A relational database would make querying and generating CSV files simpler than a non-schema-based database.
+A relational database would make generating CSV files simpler than a non-schema-based database.
 Python has also become the default language taught within UVA and is also one of the most universal understood programming languages.
 
 \subsection{Novel Contributions}
 
 \noindent We plan on increasing the number of states aggregated for the project. 
 There has already been some work scraping Massachusetts' court data and most other states have open data portals.
-We anticipate that by creating a national data aggregation tool, even more trends can be discovered.
-Journalists across the country will also be able to report on either their local trends or pressing national issues using the data.
+We anticipate that by creating a national data aggregation tool, journalists across the country will also be able to report on both their local trends and pressing national issues using the data.
 Pushing this project to encompass more states is also in line the mission of Public Interest Technology University Network grant that supports this course.
 If done well, researchers at the institutions in other states will be able to contribute to their own state's data scraping, and perform analysis on their state's data to diagnose local issues.
 
 \subsection{Risks}
 
-\noindent The most notable risk by aggregating this data is comprising the privacy of already marginalized groups.
-We plan on taking steps to remove identifying features from the data.
-We will also have independent experts review our data processing and data aggregation work to ensure that we are not compromising the rights or privacy of any individuals.
+\noindent The most notable risk by aggregating this data is comprising the privacy of already overly-surveilled groups.
+The data was originally collected by the State and intended to serve the State's interests.
+We plan on taking steps to remove identifying features from the data and will also have independent experts review our data processing and data aggregation work to ensure that we are not compromising the rights or privacy of any individuals.
 
 
 
