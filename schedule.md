@@ -16,8 +16,6 @@ The goal of this project is to develop a national court data aggregation website
 |April 15|Connect code for Charlottesville hackathon data-scrapers to service| 
 |April 22|Internal testing| 
 |April 29|Product Ready to ship| 
-|May 6| ---| 
-|May 13|---| 
  
  ** By March 4, we should have the virginia court open data service fully replicated; this can serve as the first MVP check point
 
