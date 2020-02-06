@@ -1,5 +1,7 @@
 # Courts Data Project
 
+The court data project is the product of a partnership between the Legal Data Lab at UVA Law School, the CommPAS Lab at the Batten School, the UVA Library, and the Computer Science Department.
+
 ## Background
 
 This is an open source project to scrape and publish data from US courts. This information is already publicly available and when organized well, can lead to important reporting and holding the government accountable. We recognize the importantance of preserving as much anonymity as possible in this work and are developing it with the public's interest at mind. In particular, we are focusing on marginalized communities and ensuring that we do not create a digital system that exploits or overly surveils them.
