@@ -1,6 +1,6 @@
 # Courts Data Project
 
-The court data project is the product of a partnership between the Legal Data Lab at UVA Law School, the CommPAS Lab at the Batten School, the UVA Library, and the Computer Science Department.
+The court data project is the product of a partnership between the CommPAS Lab at the Batten School (through Michele Claibourn), the UVA Library (through Michele Claibourn), the Legal Data Lab at UVA Law School (through Jon Ashley), and the Computer Science Department (through Jack Davidson and the students developing the project).
 
 ## Background
 
