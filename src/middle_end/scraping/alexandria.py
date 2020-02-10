@@ -11,7 +11,7 @@ civil = "https://ajis.alexandriava.gov/CivilCaseList.aspx?"
 
 crim_vals = {
 	'lastName':'',
-	'firstName':'',
+	'firstName':'Devon',
 	'from':'',
 	'thru':'',
 	'fileNo':'',
@@ -48,8 +48,6 @@ civil_url = civil + urllib.parse.urlencode(civ_vals)
 crim_req = urllib.request.Request(criminal_url)
 civ_req = urllib.request.Request(civil_url)
 
-crim_req = "https://ajis.alexandriava.gov/CriminalCaseList.aspx?lastName=%20&firstName=&from=&thru=&fileNo=&businessName=University%20of%20Virginia"
-
 with urllib.request.urlopen(crim_req) as response:
 	the_page = response.read().strip(b'\t')
 	ind1, ind2 = the_page.find(b'table'), the_page.find(b'/table') # RM: find the start end of the table
@@ -66,6 +64,7 @@ with urllib.request.urlopen(crim_req) as response:
 		case = [i.decode("utf-8") for i in case]
 		temp_case = crim_case_obj(case)
 		case_objs.append(temp_case)
+	print(len(case_objs))
 
 # FOR NOW IN OUR SCHEMA: case objects can serve as our default schema but we will probably need to add more info such as civ vs crim, region, etc.
 		
