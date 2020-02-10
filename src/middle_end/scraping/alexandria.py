@@ -31,7 +31,7 @@ civ_vals = {
 
 class crim_case_obj(object):
 	def __init__(self, case):
-		self.name = case[0][2:]
+		self.name = case[0]
 		self.file_num = case[1]
 		self.court = case[2]
 		self.id_num = case[3]
@@ -41,6 +41,10 @@ class crim_case_obj(object):
 		self.race = case[7]
 		self.initiated = case[8]
 		self.offense_date = case[9]
+	def __repr__(self):
+		return f'Name of defendant is: {self.name}'
+	def __str__(self):
+		return f'Name of defendant is: {self.name}'
 
 criminal_url = criminal + urllib.parse.urlencode(crim_vals)
 civil_url = civil + urllib.parse.urlencode(civ_vals)
@@ -64,7 +68,9 @@ with urllib.request.urlopen(crim_req) as response:
 		case = [i.decode("utf-8") for i in case]
 		temp_case = crim_case_obj(case)
 		case_objs.append(temp_case)
-	print(len(case_objs))
+	print('there are', len(case_objs), 'number of cases in this chunk')
+	print('first:', case_objs[0])
+	print('last:', case_objs[-1])
 
 # FOR NOW IN OUR SCHEMA: case objects can serve as our default schema but we will probably need to add more info such as civ vs crim, region, etc.
 		
