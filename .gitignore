@@ -5,3 +5,7 @@
 *.log
 *.synctex.gz
 */fonts/*
+*.nav 
+*.out 
+*.snm 
+*.toc
