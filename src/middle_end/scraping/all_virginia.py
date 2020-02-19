@@ -29,7 +29,7 @@ class virginia_scraper():
                 self.date_select(date)
                 self.crim_cases.extend(self.process_page_crim(court))
                 break
-            if count == 1: break # TEMP: TO BE DELETED
+            if count == 2: break # TEMP: TO BE DELETED
             else: self.head_home()
 
     def write_to_json(self):
@@ -77,10 +77,11 @@ class virginia_scraper():
             try: 
                 self.driver.find_element_by_css_selector("[value='Next']").click()
             except: 
-                print(":) ==> No more next pages, moving onto the next court after this page")
                 breaker += 1
+                if breaker > 1: print(":) ==> No more next pages, moving onto the next date or court!")
 
-            if breaker > 1: break
+            if breaker > 1: 
+                break
 
         return all_cases
 
