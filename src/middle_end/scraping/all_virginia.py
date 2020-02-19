@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from time import sleep
 from constants import all_courts, dates
+from case_objs import crim_case
 
 
 class virginia_scraper():
@@ -16,6 +17,7 @@ class virginia_scraper():
         self.driver.find_element_by_css_selector("[value='Accept']").click()
     
     def navigate_page(self):
+        crim_cases = []
         count = 0
         for court in all_courts:
             count += 1 # TEMP: TO BE DELETED
@@ -25,9 +27,9 @@ class virginia_scraper():
             hearing_date.click()
             for date in dates:
                 self.date_select(date)
-                self.process_page()
+                crim_cases.extend(self.process_page_crim(court))
                 break
-            if count == 2: break # TEMP: TO BE DELETED
+            if count == 1: break # TEMP: TO BE DELETED
             else: self.head_home()
 
     def court_select(self,court_name):
@@ -45,7 +47,8 @@ class virginia_scraper():
     def head_home(self): self.driver.get("https://eapps.courts.state.va.us/gdcourts/welcomePage.do")
 
     
-    def process_page(self):
+    def process_page_crim(self,court):
+        all_cases = []
         while True:
             # check all of the boxes
             boxes = self.driver.find_elements_by_css_selector("[type='checkbox']")
@@ -54,10 +57,24 @@ class virginia_scraper():
 
             # iterate through all of the results on the page
             for _ in range(len(boxes) - 1):
-                sleep(.5)         
+                all_cases.append(self.page_helper_crim(court))
                 self.driver.find_element_by_css_selector("[value='Next']").click()
+
             self.driver.find_element_by_css_selector("[value='Back to Search Results']").click()
 
             # try to click on the next set of results, if you can't exit
             try: self.driver.find_element_by_css_selector("[value='Next']").click()
             except: break
+        return all_cases
+
+    def page_helper_crim(self, court):
+        def just_odds(table):
+            return [table[i] for i in range(len(table)) if i % 2 == 0]
+
+        table = [i.text for i in self.driver.find_elements_by_css_selector("td")]
+        table = [i for i in table if i != '']
+        print(len(table))
+        case_info = just_odds(table[table.index('Case Number :') + 1:table.index('DOB :')+2])
+        charge_info = just_odds(table[table.index('Charge :')+1: table.index('Amended Case Type :')+2])
+        dispo_info = just_odds(table[table.index('Final Disposition :')+1 : table.index('VASAP :')+2])
+        return crim_case(case_info, charge_info, dispo_info, court)
