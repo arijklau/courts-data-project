@@ -14,22 +14,18 @@ class virginia_scraper():
 
     def access_page(self):
         self.driver.get("https://eapps.courts.state.va.us/gdcourts/caseSearch.do")
-        # sleep(1)
-        # login_btn = bot.driver.find_elements_by_xpath("//*[contains(text(), 'Sign in')]")
-        # login_btn[0].click()
-        accept_field = bot.driver.find_element_by_css_selector("[value='Accept']")
+        accept_field = self.driver.find_element_by_css_selector("[value='Accept']")
         accept_field.click()
     
     def navigate_page(self):
         for court in all_courts:
             self.court_select(court)
+            self.driver.find_element_by_xpath("//body").click()
             hearing_date = self.driver.find_element(By.PARTIAL_LINK_TEXT, "Hearing Date")
             hearing_date.click()
             for date in dates:
-                court_field = bot.driver.find_element_by_css_selector("[id='txthearingdate']")
-                court_field.click()
-                court_field.send_keys("02/03/2020")
-                court_field.send_keys(Keys.ENTER)
+                self.date_select(date)
+                self.process_page()
                 break
             break
 
@@ -37,3 +33,17 @@ class virginia_scraper():
         court_field = self.driver.find_element_by_css_selector("[name='selectedCourtName']")
         court_field.click()
         court_field.send_keys(court_name)
+
+    def date_select(self,date):
+        date_field = self.driver.find_element_by_css_selector("[id='txthearingdate']")
+        date_field.click()
+        date_field.send_keys(date)
+        date_field.send_keys(Keys.ENTER)
+    
+    def process_page(self):
+        boxes = self.driver.find_elements_by_css_selector("[type='checkbox']")
+        for b in boxes: b.click()
+        self.driver.find_element_by_css_selector("[value='Display Case Details']").click()
+        for _ in range(len(boxes) - 1):
+            sleep(.5)         
+            self.driver.find_element_by_css_selector("[value='Next']").click()
