@@ -1,3 +1,5 @@
+import json
+
 class crim_case(object):
     def __init__(self, case_info, charge_info, dispo_info, court):
         self.case_number = case_info[0]
@@ -41,3 +43,5 @@ class crim_case(object):
         self.vasap = dispo_info[14]
         
         self.court = court
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)

@@ -10,3 +10,4 @@
 *.snm 
 *.toc
 *__pycache__/
+*.json
