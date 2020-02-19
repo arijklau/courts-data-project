@@ -51,19 +51,21 @@ class virginia_scraper():
         all_cases = []
         while True:
             # check all of the boxes
-            boxes = self.driver.find_elements_by_css_selector("[type='checkbox']")
-            for b in boxes: b.click()
-            self.driver.find_element_by_css_selector("[value='Display Case Details']").click()
-            assert len(boxes) > 0
+            try:
+                boxes = self.driver.find_elements_by_css_selector("[type='checkbox']")
+                for b in boxes: b.click()
+                self.driver.find_element_by_css_selector("[value='Display Case Details']").click()
+                assert len(boxes) > 0
+            except:
+                print(":( => no boxes")
 
             # iterate through all of the results on the page
             for _ in range(len(boxes)):
-                try:
-                    all_cases.append(self.page_helper_crim(court))
-                    self.driver.find_element_by_css_selector("[value='Next']").click()
-                except:
-                    print(':( ==> failed to process a page of cases')
+                all_cases.append(self.page_helper_crim(court))
+                try: self.driver.find_element_by_css_selector("[value='Next']").click()
+                except: pass
 
+            sleep(.5)
             self.driver.find_element_by_css_selector("[value='Back to Search Results']").click()
 
             # try to click on the next set of results, if you can't exit
@@ -72,6 +74,7 @@ class virginia_scraper():
             except: 
                 print(":( ==> No more next pages, moving onto the next court")
                 break
+
         return all_cases
 
     def page_helper_crim(self, court):
