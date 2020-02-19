@@ -31,8 +31,7 @@ class virginia_scraper():
             else: self.head_home()
 
     def court_select(self,court_name):
-        court_field = self.driver.find_element_by_css_selector("[name='selectedCourtName']")
-        court_field.clear()
+        self.driver.find_element_by_css_selector("[name='selectedCourtName']").clear()
         court_field = self.driver.find_element_by_css_selector("[name='selectedCourtName']")
         court_field.click()
         court_field.send_keys(court_name)
@@ -43,14 +42,22 @@ class virginia_scraper():
         date_field.send_keys(date)
         date_field.send_keys(Keys.ENTER)
     
-    def head_home(self):
-        self.driver.get("https://eapps.courts.state.va.us/gdcourts/welcomePage.do")
+    def head_home(self): self.driver.get("https://eapps.courts.state.va.us/gdcourts/welcomePage.do")
 
     
     def process_page(self):
-        boxes = self.driver.find_elements_by_css_selector("[type='checkbox']")
-        for b in boxes: b.click()
-        self.driver.find_element_by_css_selector("[value='Display Case Details']").click()
-        for _ in range(len(boxes) - 1):
-            sleep(.5)         
-            self.driver.find_element_by_css_selector("[value='Next']").click()
+        while True:
+            # check all of the boxes
+            boxes = self.driver.find_elements_by_css_selector("[type='checkbox']")
+            for b in boxes: b.click()
+            self.driver.find_element_by_css_selector("[value='Display Case Details']").click()
+
+            # iterate through all of the results on the page
+            for _ in range(len(boxes) - 1):
+                sleep(.5)         
+                self.driver.find_element_by_css_selector("[value='Next']").click()
+            self.driver.find_element_by_css_selector("[value='Back to Search Results']").click()
+
+            # try to click on the next set of results, if you can't exit
+            try: self.driver.find_element_by_css_selector("[value='Next']").click()
+            except: break
