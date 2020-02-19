@@ -12,12 +12,13 @@ class virginia_scraper():
         self.driver = webdriver.Chrome(options=chrome_options)
 
     def access_page(self):
-        self.driver.get("https://eapps.courts.state.va.us/gdcourts/caseSearch.do")
-        accept_field = self.driver.find_element_by_css_selector("[value='Accept']")
-        accept_field.click()
+        self.head_home()
+        self.driver.find_element_by_css_selector("[value='Accept']").click()
     
     def navigate_page(self):
+        count = 0
         for court in all_courts:
+            count += 1 # TEMP: TO BE DELETED
             self.court_select(court)
             self.driver.find_element_by_xpath("//body").click()
             hearing_date = self.driver.find_element(By.PARTIAL_LINK_TEXT, "Hearing Date")
@@ -26,9 +27,12 @@ class virginia_scraper():
                 self.date_select(date)
                 self.process_page()
                 break
-            break
+            if count == 2: break # TEMP: TO BE DELETED
+            else: self.head_home()
 
     def court_select(self,court_name):
+        court_field = self.driver.find_element_by_css_selector("[name='selectedCourtName']")
+        court_field.clear()
         court_field = self.driver.find_element_by_css_selector("[name='selectedCourtName']")
         court_field.click()
         court_field.send_keys(court_name)
@@ -38,6 +42,10 @@ class virginia_scraper():
         date_field.click()
         date_field.send_keys(date)
         date_field.send_keys(Keys.ENTER)
+    
+    def head_home(self):
+        self.driver.get("https://eapps.courts.state.va.us/gdcourts/welcomePage.do")
+
     
     def process_page(self):
         boxes = self.driver.find_elements_by_css_selector("[type='checkbox']")
