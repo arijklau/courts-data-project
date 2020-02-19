@@ -11,13 +11,13 @@ class virginia_scraper():
         chrome_options = webdriver.ChromeOptions(); 
         chrome_options.add_experimental_option("excludeSwitches", ['enable-automation']); 
         self.driver = webdriver.Chrome(options=chrome_options)
+        self.crim_cases = []
 
     def access_page(self):
         self.head_home()
         self.driver.find_element_by_css_selector("[value='Accept']").click()
     
     def navigate_page(self):
-        crim_cases = []
         count = 0
         for court in all_courts:
             count += 1 # TEMP: TO BE DELETED
@@ -27,7 +27,7 @@ class virginia_scraper():
             hearing_date.click()
             for date in dates:
                 self.date_select(date)
-                crim_cases.extend(self.process_page_crim(court))
+                self.crim_cases.append(self.process_page_crim(court))
                 break
             if count == 1: break # TEMP: TO BE DELETED
             else: self.head_home()
@@ -54,17 +54,24 @@ class virginia_scraper():
             boxes = self.driver.find_elements_by_css_selector("[type='checkbox']")
             for b in boxes: b.click()
             self.driver.find_element_by_css_selector("[value='Display Case Details']").click()
+            assert len(boxes) > 0
 
             # iterate through all of the results on the page
-            for _ in range(len(boxes) - 1):
-                all_cases.append(self.page_helper_crim(court))
-                self.driver.find_element_by_css_selector("[value='Next']").click()
+            for _ in range(len(boxes)):
+                try:
+                    all_cases.append(self.page_helper_crim(court))
+                    self.driver.find_element_by_css_selector("[value='Next']").click()
+                except:
+                    print(':( ==> failed to process a page of cases')
 
             self.driver.find_element_by_css_selector("[value='Back to Search Results']").click()
 
             # try to click on the next set of results, if you can't exit
-            try: self.driver.find_element_by_css_selector("[value='Next']").click()
-            except: break
+            try: 
+                self.driver.find_element_by_css_selector("[value='Next']").click()
+            except: 
+                print(":( ==> No more next pages, moving onto the next court")
+                break
         return all_cases
 
     def page_helper_crim(self, court):
@@ -73,8 +80,8 @@ class virginia_scraper():
 
         table = [i.text for i in self.driver.find_elements_by_css_selector("td")]
         table = [i for i in table if i != '']
-        print(len(table))
         case_info = just_odds(table[table.index('Case Number :') + 1:table.index('DOB :')+2])
         charge_info = just_odds(table[table.index('Charge :')+1: table.index('Amended Case Type :')+2])
         dispo_info = just_odds(table[table.index('Final Disposition :')+1 : table.index('VASAP :')+2])
+        print(f'processed case no: {case_info[0]}')
         return crim_case(case_info, charge_info, dispo_info, court)
