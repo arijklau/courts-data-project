@@ -2,9 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from time import sleep
-from all_courts import all_courts
+from constants import all_courts, dates
 
-dates = ["02/03/2020"]
 
 class virginia_scraper():
     def __init__(self):
