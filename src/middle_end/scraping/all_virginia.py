@@ -171,7 +171,6 @@ class virginia_scraper():
         else:
             assert self.driver.find_element_by_xpath("//*[contains(text(),'Garnishee')]").text == 'Garnishee :'
             print('already here')
-            print(table[table.index('Garnishee :')+1])
 
         table = [i.text for i in self.driver.find_elements_by_css_selector("td")]
         case_info = just_odds(table[table.index('Case Number :') + 1:table.index('Debt Type :')+2])
