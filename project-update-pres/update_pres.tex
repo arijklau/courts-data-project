@@ -1,0 +1,51 @@
+
+
+\documentclass{beamer}
+ 
+\usepackage[utf8]{inputenc}
+
+
+\usetheme{CambridgeUS}
+\useoutertheme{split}
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+ 
+%Information to be included in the title page:
+\title{Courts Data Project: Project Update}
+\author{Rohit Musti, Omkar Bhat, Jack Verrier, Ari Klau}
+\institute{Innovating in the Public Interest}
+\date{\today}
+ 
+\begin{document}
+ 
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Completed}
+\begin{itemize}
+    \item All publicly available data scraping ready-ish *
+    \item Backend database schema decided upon
+    \item More use cases identified
+    \begin{itemize}
+        \item Public Defender
+        \item Other government actors access the database
+        \item Need custom permissions for some groups
+        \item Challenge of expungement
+    \end{itemize}
+    \item Identified new expansion opportunities
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{TODO}
+\begin{itemize}
+    \item Need to bypass captcha
+    \item Need to set up scraping front end
+    \item Need to set up backend database
+    \item Need to set up front end GUI
+    \item Need to containerize it all 
+    \item Need to expand to another city/state
+\end{itemize}
+\end{frame}
+
+\end{document}
+
