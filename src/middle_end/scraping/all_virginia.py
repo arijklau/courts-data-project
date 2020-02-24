@@ -55,7 +55,9 @@ class virginia_scraper():
 
     def write_to_json(self):
         for case in self.crim_cases:
-            print(case.to_json(), file=open("cases.json", "a"))
+            print(case.to_json(), file=open("crim_cases.json", "a"))
+        for case in self.crim_cases:
+            print(case.to_json(), file=open("civil_cases.json", "a"))
         
     def error_check(self):
         return self.driver.find_elements_by_css_selector("[class='errorFont']")
@@ -121,8 +123,9 @@ class virginia_scraper():
         case_info = just_odds(table[table.index('Case Number :') + 1:table.index('DOB :')+2])
         charge_info = just_odds(table[table.index('Charge :')+1: table.index('Amended Case Type :')+2])
         dispo_info = just_odds(table[table.index('Final Disposition :')+1 : table.index('VASAP :')+2])
+        hearing_info = table[table.index('Hearing Information') + 1]
         print(f'processed case no: {case_info[0]}')
-        return crim_case(case_info, charge_info, dispo_info, court)
+        return crim_case(case_info, charge_info, dispo_info, hearing_info, court)
 
 
 

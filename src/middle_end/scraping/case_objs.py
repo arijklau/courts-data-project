@@ -1,7 +1,7 @@
 import json
 
 class crim_case(object):
-    def __init__(self, case_info, charge_info, dispo_info, court):
+    def __init__(self, case_info, charge_info, dispo_info, hearing_info, court):
         self.case_number = case_info[0]
         self.filed_date = case_info[1]
         self.locality = case_info[2]
@@ -41,6 +41,8 @@ class crim_case(object):
         self.fine_costs_paid = dispo_info[12]
         self.fine_costs_paid_date = dispo_info[13]
         self.vasap = dispo_info[14]
+
+        self.hearing_info = hearing_info
         
         self.court = court
     def to_json(self):
