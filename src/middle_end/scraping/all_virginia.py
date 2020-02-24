@@ -38,6 +38,7 @@ class virginia_scraper():
                 
 
             # # Process criminal cases
+            hearing_date = self.driver.find_elements(By.PARTIAL_LINK_TEXT, "Hearing Date")
             hearing_date[0].click()
             for date in dates:
                 self.date_select(date)
