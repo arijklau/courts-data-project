@@ -1,4 +1,4 @@
-all_courts = [
+all_district_courts = [
 "Accomack General District Court", 
 "Albemarle General District Court", 
 "Alexandria General District Court", 
@@ -135,4 +135,4 @@ all_courts = [
 "York General District Court"
 ]
 
-dates = ["02/03/2020"]
+dates = ["02/03/2020", "02/04/2020", "02/05/2020"]

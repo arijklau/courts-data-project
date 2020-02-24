@@ -45,3 +45,41 @@ class crim_case(object):
         self.court = court
     def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+
+class civil_case(object):
+    def __init__(self, case_info, judgement_info, garnishment_info, appeal_info, plaintiff_info, defendant_info, hearing_info, court):
+        self.case_number = case_info[0]
+        self.filed_date = case_info[1]
+        self.case_type = case_info[2]
+        self.debt_type = case_info[3]
+
+        self.judgment = judgement_info[0]
+        self.costs = judgement_info[1]
+        self.attorney_fees = judgement_info[2]
+        self.principal_amount = judgement_info[3]
+        self.other_amount = judgement_info[4]
+        self.interest_award = judgement_info[5]
+        self.possession = judgement_info[6]
+        self.writ_issue_date = judgement_info[7]
+        self.homestead_exemption_waived = judgement_info[8]
+        self.is_judgement_satisifed = judgement_info[9]
+        self.date_satisfaction_filed = judgement_info[10]
+        self.other_awarded = judgement_info[11]
+        self.further_case_info = judgement_info[12]
+
+        self.garnishee = garnishment_info[0]
+        self.address = garnishment_info[1]
+        self.garnishee_answer = garnishment_info[2]
+        self.answer_date = garnishment_info[3]
+        self.number_of_checks_received = garnishment_info[4]
+
+        self.appeal_date = appeal_info[0]
+        self.appealed_by = appeal_info[1]
+
+        self.plaintiff_info = plaintiff_info
+        self.defendant_info = defendant_info
+        self.hearing_info = hearing_info
+        
+        self.court = court
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
