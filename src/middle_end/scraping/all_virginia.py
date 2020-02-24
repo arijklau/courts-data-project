@@ -38,15 +38,15 @@ class virginia_scraper():
                 
 
             # # Process criminal cases
-            # hearing_date[0].click()
-            # for date in dates:
-            #     self.date_select(date)
+            hearing_date[0].click()
+            for date in dates:
+                self.date_select(date)
 
-            #     # make sure it isn't an error page
-                # if self.error_check():
-                #     print('error page found')
-                #     continue
-            #     self.crim_cases.extend(self.process_page_crim(court))
+                # make sure it isn't an error page
+                if self.error_check():
+                    print('error page found')
+                    continue
+                self.crim_cases.extend(self.process_page_crim(court))
 
 
             if count == 2: break # TEMP: TO BE DELETED
@@ -166,11 +166,9 @@ class virginia_scraper():
 
         # try to get the garnishment twice
         if self.driver.find_element_by_xpath("//*[contains(text(),'Garnishee')]").text != 'Garnishee :': 
-            print('going to click')
             self.driver.find_element_by_css_selector("[id='imgelapsedGarnish']").click()
         else:
             assert self.driver.find_element_by_xpath("//*[contains(text(),'Garnishee')]").text == 'Garnishee :'
-            print('already here')
 
         table = [i.text for i in self.driver.find_elements_by_css_selector("td")]
         case_info = just_odds(table[table.index('Case Number :') + 1:table.index('Debt Type :')+2])
