@@ -177,11 +177,7 @@ class virginia_scraper():
         case_info = just_odds(table[table.index('Case Number :') + 1:table.index('Debt Type :')+2])
         judgement_info = just_odds(table[table.index('Judgment :')+1: table.index('Further Case Information :')+2])
 
-        # garnishment_info = just_odds(table[table.index('Garnishee :')+1 : table.index('Number of Checks Received :')+2])
-        try: 
-            garnishment_info = just_odds(table[table.index('Garnishee :')+1 : table.index('Number of Checks Received :')+2])
-        except:
-            print('need to click again')
+        garnishment_info = just_odds(table[table.index('Garnishee :')+1 : table.index('Number of Checks Received :')+2])
         appeal_info = just_odds(table[table.index('Appeal Date :')+1 : table.index('Appealed By :')+2])
         hearing_info = just_odds(table[table.index('Appeal Date :')+1 : table.index('Appealed By :')+2])
         plaintiff_info = table[table.index('Plaintiff Information') + 1]
