@@ -56,7 +56,7 @@ class virginia_scraper():
     def write_to_json(self):
         for case in self.crim_cases:
             print(case.to_json(), file=open("crim_cases.json", "a"))
-        for case in self.crim_cases:
+        for case in self.civil_cases:
             print(case.to_json(), file=open("civil_cases.json", "a"))
         
     def error_check(self):
