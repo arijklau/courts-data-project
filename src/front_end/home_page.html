@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Court Data Home</title>
+    <link rel="stylesheet" href="home_page.css">
+</head>
+<body>
+    <!-- Civil or Criminal -->
+    <div class="civCrim">
+        <form>
+            <input type="checkbox" id="civil" name="civil" value="civil">
+            <label for="civil">Civil</label><br>
+            <input type="checkbox" id="criminal" name="criminal" value="criminal">
+            <label for="criminal">Criminal</label><br>
+        </form>
+    </div>
+
+
+    <!-- List of Courts -->
+    <div class="courtsList">
+        <form id="courtsList"></form>
+    </div>
+
+    <!-- Date Range -->
+    <div class="datePickers">
+        <label for="startDate">From:</label>
+        <input type="date" id="startDate">
+
+        <label for="endDate">To:</label>
+        <input type="date" id="endDate">
+    </div>
+
+    <div class=searchButton>
+        <button onclick="formQuery()">Search</button>
+    </div>
+
+    <div id="queryOutput" class="queryOutput">
+
+    </div>
+
+    <script src="home_page.js"></script>
+</body>
+</html>

@@ -1,3 +1,0 @@
-###
-
-This is just a temporarily holding file to preserve the file structure
